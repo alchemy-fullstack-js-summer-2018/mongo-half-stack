@@ -4,6 +4,8 @@ const request = require('./request');
 
 describe('Players API', () => {
     let savedPlayers = [];
+    let injoong = {};
+    let arthur = {};
 
     beforeEach(() => {
         savedPlayers = [];
@@ -38,6 +40,10 @@ describe('Players API', () => {
             wins: 2
         });
     });
+    beforeEach(() => {
+        injoong = savedPlayers[0];
+        arthur = savedPlayers[1];
+    });
 
     it('returns 404 on bad url', () => {
         return request
@@ -57,9 +63,19 @@ describe('Players API', () => {
 
     it('gets a player by id', () => {
         return request
-            .get(`/players/${savedPlayers[0]._id}`)
+            .get(`/players/${injoong._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, savedPlayers[0]);
+                assert.deepEqual(body, injoong);
+            });
+    });
+
+    it('updates a player', () => {
+        injoong.wins++;
+        return request
+            .put(`/players/${injoong._id}`)
+            .send(injoong)
+            .then(({ body }) => {
+                assert.deepEqual(body, injoong);
             });
     });
 });
