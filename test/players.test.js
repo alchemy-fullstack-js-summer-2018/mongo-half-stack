@@ -2,10 +2,11 @@ const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-describe.only('Players API', () => {
+describe('Players API', () => {
     let savedPlayers = [];
     let injoong = {};
     let arthur = {};
+    let bobby = {};
 
     beforeEach(() => {
         return mongo.then(db => {
@@ -24,6 +25,11 @@ describe.only('Players API', () => {
                 name: 'Arthur',
                 kills: 10,
                 wins: 2
+            },
+            {
+                name: 'Bobby',
+                kills: 25,
+                wins: 8
             }
         ];
         return request
@@ -37,6 +43,7 @@ describe.only('Players API', () => {
     beforeEach(() => {
         injoong = savedPlayers[0];
         arthur = savedPlayers[1];
+        bobby = savedPlayers[2];
     });
 
     it('returns 404 on bad url', () => {
@@ -83,6 +90,14 @@ describe.only('Players API', () => {
             });
     });
 
+    it('gets players by query', () => {
+        return request
+            .get('/players?kills=10')
+            .then(({ body }) => {
+                assert.deepEqual(body, [injoong, arthur]);
+            });
+    });
+
     it('deletes a player', () => {
         return request
             .del(`/players/${arthur._id}`)
@@ -93,7 +108,7 @@ describe.only('Players API', () => {
                 return request.get('/players');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, [injoong]);
+                assert.deepEqual(body, [injoong, bobby]);
             });
     });
 
