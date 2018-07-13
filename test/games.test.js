@@ -2,47 +2,47 @@ const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-describe('Players API', () => {
-    let savedPlayers = [];
-    let injoong = {};
-    let arthur = {};
+describe('Games API', () => {
+    let savedGames = [];
+    let splendor = {};
+    let lostLegacy = {};
 
     beforeEach(() => {
-        savedPlayers = [];
+        savedGames = [];
         return mongo.then(db => {
-            db.collection('players').remove();
+            db.collection('games').remove();
         });
     });
 
 
-    const save = player => {
+    const save = game => {
         return request
-            .post('/players')
-            .send(player)
+            .post('/games')
+            .send(game)
             .then(({ body }) => {
                 assert.ok(body._id);
-                assert.equal(body.name, player.name);
-                savedPlayers.push(body);
+                assert.equal(body.name, game.name);
+                savedGames.push(body);
             });
     };
     
     beforeEach(() => {
         return save({
-            name: 'Injoong',
-            kills: 0,
-            wins: 1
+            name: 'Splendor',
+            players: 4,
+            type: 'Abstract Strategy'
         });
     });
     beforeEach(() => {
         return save({
-            name: 'Arthur',
-            kills: 10,
-            wins: 2
+            name: 'Lost Legacy',
+            players: 4,
+            type: 'Casual'
         });
     });
     beforeEach(() => {
-        injoong = savedPlayers[0];
-        arthur = savedPlayers[1];
+        splendor = savedGames[0];
+        lostLegacy = savedGames[1];
     });
 
     it('returns 404 on bad url', () => {
@@ -53,43 +53,43 @@ describe('Players API', () => {
             });
     });
 
-    it('gets players', () => {
+    it('gets Games', () => {
         return request
-            .get('/players')
+            .get('/games')
             .then(({ body }) => {
-                assert.deepEqual(body, savedPlayers);
+                assert.deepEqual(body, savedGames);
             });
     });
 
     it('gets a player by id', () => {
         return request
-            .get(`/players/${injoong._id}`)
+            .get(`/games/${splendor._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, injoong);
+                assert.deepEqual(body, splendor);
             });
     });
 
     it('deletes a player', () => {
         return request
-            .del(`/players/${arthur._id}`)
+            .del(`/games/${lostLegacy._id}`)
             .then((res) => {
                 assert.equal(res.status, 200);
             })
             .then(() => {
-                return request.get('/players');
+                return request.get('/games');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, [injoong]);
+                assert.deepEqual(body, [splendor]);
             });
     });
 
     it('updates a player', () => {
-        injoong.wins++;
+        splendor.type = 'Abstract';
         return request
-            .put(`/players/${injoong._id}`)
-            .send(injoong)
+            .put(`/games/${splendor._id}`)
+            .send(splendor)
             .then(({ body }) => {
-                assert.deepEqual(body, injoong);
+                assert.deepEqual(body, splendor);
             });
     });
 });
