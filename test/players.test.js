@@ -78,4 +78,18 @@ describe('Players API', () => {
                 assert.deepEqual(body, injoong);
             });
     });
+
+    it('deletes a player', () => {
+        return request
+            .del(`/players/${arthur._id}`)
+            .then((res) => {
+                assert.equal(res.status, 200);
+            })
+            .then(() => {
+                return request.get('/players');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [injoong]);
+            });
+    });
 });
