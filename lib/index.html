@@ -7,6 +7,20 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>I a page.</h1>
+    <ul id="shows"></ul>
+    <script>
+        fetch('./routes/pies')
+            .then(response => response.json())
+            .then(pies => {
+                const ul = document.getElementById('pies');
+                pies.forEach(pie => {
+                    const li = document.createElement('li');
+                    li.innerText = `${pie.name}`;
+                    ul.appendChild(li);
+                })
+            })
+    </script>
     
 </body>
 </html>
