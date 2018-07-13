@@ -3,13 +3,15 @@ const { assert } = require('chai');
 const request = require('./request');
 
 describe('Players API', () => {
+    let savedPlayers = [];
+
     beforeEach(() => {
+        savedPlayers = [];
         return mongo.then(db => {
             db.collection('leaderboards').remove();
         });
     });
 
-    let savedPlayers = [];
 
     const save = player => {
         return request
@@ -42,6 +44,14 @@ describe('Players API', () => {
             .get('/players')
             .then(({ body }) => {
                 assert.deepEqual(body, savedPlayers);
+            });
+    });
+
+    it('gets a player by id', () => {
+        return request
+            .get(`/players/${savedPlayers[0]._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, savedPlayers[0]);
             });
     });
 });
