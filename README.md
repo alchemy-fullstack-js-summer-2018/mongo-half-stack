@@ -1,10 +1,7 @@
 # Mongo Half Stack
 
 ## Project Description
-
-
-## Contributor
-Mariah Adams & Sarah Rehmer
+Stay tuned!
 
 ## Developer
 Requires Node v10 or later.
@@ -15,7 +12,16 @@ Requires Node v10 or later.
 * To test, run `npm test`. 
 
 ### how to use API
-* to be added
+* Connect to server with `npm run start`.
+* Enter `http://localhost:3000` in your browser.
+
+More to come...
+
+## Contributor
+Mariah Adams & Sarah Rehmer
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgment 
-Forked from alchemy-fullstack-js-summer-2018/mongo-half-stack
+Forked from [alchemy-fullstack-js-summer-2018/mongo-half-stack](https://github.com/alchemy-fullstack-js-summer-2018/mongo-half-stack)
