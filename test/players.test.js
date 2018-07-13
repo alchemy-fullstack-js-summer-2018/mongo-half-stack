@@ -33,6 +33,6 @@ describe('Players API', () => {
     });
 
     it('gets players', () => {
-
+        console.log(player);
     });
 });
