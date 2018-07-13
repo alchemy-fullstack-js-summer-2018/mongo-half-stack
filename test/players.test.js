@@ -39,6 +39,14 @@ describe('Players API', () => {
         });
     });
 
+    it('returns 404 on bad url', () => {
+        return request
+            .get('/bad')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     it('gets players', () => {
         return request
             .get('/players')
