@@ -10,5 +10,3 @@ const server = createServer(app);
 server.listen(PORT, () => {
     console.log('server running on', server.address().port);
 });
-
-console.log('testing and more and more');
