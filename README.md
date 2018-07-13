@@ -18,7 +18,7 @@ Requires Node v10 or later.
 More to come...
 
 ## Contributor
-Mariah Adams & Sarah Rehmer
+[Mariah Adams](https://github.com/MariahAdams) & [Sarah Rehmer](https://github.com/Rehmsy)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
