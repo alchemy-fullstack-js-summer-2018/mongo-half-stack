@@ -15,9 +15,6 @@
     "test:watch": "nodemon --exec 'npm run mocha -s'",
     "start": "node server.js",
     "start:watch": "nodemon server.js",
-    "db:create": "node db/create-db.js",
-    "db:load": "node db/load-db.js",
-    "db:drop": "node db/drop-tables",
     "db:all": "npm run db:drop && npm run db:create && npm run db:load"
   },
   "repository": {
