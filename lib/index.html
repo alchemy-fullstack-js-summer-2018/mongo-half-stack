@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MONGODB Lab</title>
+</head>
+<body>
+    <h1>Resource 1</h1>
+    <ul id="robert"></ul>
+    <script>
+        fetch('/pets')
+            .then(response => response.json())
+            .then(pets => {
+                const ul = document.getElementById('pets');
+                pet.forEach(pet => {
+                    const li = document.createElement('li');
+                    li.innerText = `${pet.name} ${pet.description}`;
+                    ul.appendChild;
+                });
+            });
+        </script>
+
+    <h1>Resource 2</h1>
+    <ul id="mark"></ul>
+    <script>
+            fetch('/pets')
+                .then(response => response.json())
+                .then(pets => {
+                    const ul = document.getElementById('pets');
+                    pet.forEach(pet => {
+                        const li = document.createElement('li');
+                        li.innerText = `${pet.name} ${pet.description}`;
+                        ul.appendChild;
+                    });
+                });
+            </script>
+    
+</body>
+</html>
