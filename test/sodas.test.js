@@ -38,4 +38,12 @@ describe('Sodas API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
+    it('Gets a soda by id', () => {
+        return request
+            .get(`/sodas/${soda._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, soda);
+            });
+    });
 });
