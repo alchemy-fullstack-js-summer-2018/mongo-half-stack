@@ -1,8 +1,4 @@
-
-
-
-
-
+/* not nec */
 const { MongoClient/* , ObjectId */ } = require('mongodb');
 
 
@@ -12,12 +8,7 @@ MongoClient.connect(url, { useNewUrlParser: true })
     .then(_client => {
         client = _client;
         const db = client.db();
-        return db.collection('pies')
-            .find()
-            .toArray()
-
-            .insert({ name: 'creampie' })
-            .then(result => result.ops[0]);
+        return db.collection('pies');
     })
     .then(pies => {
         console.log(

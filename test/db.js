@@ -1,7 +1,6 @@
-require('dotenv').config({ path: './test.env' });
+require('dotenv').config({ path: './test/.env' });
 const mongo = require('../lib/mongodb');
 
 after(() => {
     mongo.client.close();
-
 });
