@@ -57,6 +57,14 @@ describe('Sodas API', () => {
             }); 
     });
 
+    it('Gets sodas', () => {
+        return request
+            .get('/sodas')
+            .then(({ body }) => {
+                assert.deepEqual(body, [soda]);
+            });
+    });
+
     it('Removes a soda', () => {
         return request
             .del(`/sodas/${soda._id}`)
