@@ -33,9 +33,36 @@ describe('Fruits API', () => {
     });
 
     it('returns 404 on a bad url', () => {
-        return request.get('/bad')
+        return request
+            .get('/bad')
             .then(res => {
                 assert.equal(res.status, 404);
+            });
+    });
+
+    it('gets a fruit by id', () => {
+        return request
+            .get(`/fruits/${fruit._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, fruit);
+            });
+    });
+
+    it('updates a fruit', () => {
+        fruit.calories = '85';
+        return request
+            .put(`/fruits/${fruit._id}`)
+            .send(fruit)
+            .then(({ body }) => {
+                assert.deepEqual(body, fruit);
+            });
+    });
+
+    it('get fruits', () => {
+        return request
+            .get('/fruits')
+            .then(({ body }) => {
+                assert.deepEqual(body, [fruit]);
             });
     });
 });
