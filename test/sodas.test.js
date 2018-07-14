@@ -46,4 +46,14 @@ describe('Sodas API', () => {
                 assert.deepEqual(body, soda);
             });
     });
+
+    it('Updates a soda', () => {
+        soda.size = 'xxl';
+        return request
+            .put(`/sodas/${soda._id}`)   
+            .send(soda)
+            .then(({ body }) => {
+                assert.deepEqual(body, soda);
+            }); 
+    });
 });
