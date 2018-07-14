@@ -26,14 +26,15 @@
     "url": "https://github.com/robinhood182/mongo-half-stack/issues"
   },
   "homepage": "https://github.com/robinhood182/mongo-half-stack#readme",
-  "dependencies": {
+  "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "eslint": "^5.1.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.1"
   },
-  "devDependencies": {
-    "dotenv": "^6.0.0"
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mongodb": "^3.1.1"
   }
 }
