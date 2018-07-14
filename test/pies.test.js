@@ -30,7 +30,7 @@ describe.only('pies api', () => {
         assert.ok(pie._id);
     });
 
-    it.skip('returns 404 bad url', () => {
+    it('returns 404 bad url', () => {
         return request
             .get('/bad') 
             .then(res => {
@@ -39,7 +39,8 @@ describe.only('pies api', () => {
     });
 
     it('gets a pie', () => {
-        return request.get('/pies')
+        return request
+            .get('/pies')
             .then(({ body }) => {
                 assert.deepEqual(body, [pie]);
             });

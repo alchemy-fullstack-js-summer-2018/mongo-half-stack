@@ -1,4 +1,4 @@
-/* not nec */
+/* not necessary */
 const { MongoClient/* , ObjectId */ } = require('mongodb');
 
 
