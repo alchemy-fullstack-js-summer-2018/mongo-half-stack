@@ -38,11 +38,19 @@ describe.only('pies api', () => {
             });
     });
 
-    it('gets a pie', () => {
+    it('gets pies', () => {
         return request
             .get('/pies')
             .then(({ body }) => {
                 assert.deepEqual(body, [pie]);
+            });
+    });
+
+    it('get a pie by id', () => {
+        return request
+            .get(`/pies/${pie._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, pie);
             });
     });
 });
