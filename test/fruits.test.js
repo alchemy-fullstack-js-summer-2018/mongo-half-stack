@@ -10,9 +10,11 @@ describe('Fruits API', () => {
         });
     });
 
-    let fruit;
+    let berries;
+    let tropical;
+
     beforeEach(() => {
-        const data = {
+        const fruit1 = {
             name: 'Strawberries',
             color: 'red',
             calories: '75'
@@ -20,16 +22,33 @@ describe('Fruits API', () => {
 
         return request
             .post('/fruits')
-            .send(data)
+            .send(fruit1)
             .then(({ body }) => {
                 assert.ok(body._id);
-                assert.equal(body.name, data.name);
-                fruit = body;
+                assert.equal(body.name, fruit1.name);
+                berries = body;
+            });
+    });
+    beforeEach(() => {
+        const fruit2 = {
+            name: 'Mangoes',
+            color: 'yellow',
+            calories: '201'
+        };
+
+        return request
+            .post('/fruits')
+            .send(fruit2)
+            .then(({ body }) => {
+                assert.ok(body._id);
+                assert.equal(body.name, fruit2.name);
+                tropical = body;
             });
     });
 
     it('saves  a fruit', () => {
-        assert.ok(fruit._id);
+        assert.ok(berries._id);
+        // assert.ok(fruit._id);
     });
 
     it('returns 404 on a bad url', () => {
@@ -42,27 +61,41 @@ describe('Fruits API', () => {
 
     it('gets a fruit by id', () => {
         return request
-            .get(`/fruits/${fruit._id}`)
+            .get(`/fruits/${berries._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, fruit);
+                assert.deepEqual(body, berries);
             });
     });
 
     it('updates a fruit', () => {
-        fruit.calories = '85';
+        berries.calories = '60';
         return request
-            .put(`/fruits/${fruit._id}`)
-            .send(fruit)
+            .put(`/fruits/${berries._id}`)
+            .send(berries)
             .then(({ body }) => {
-                assert.deepEqual(body, fruit);
+                assert.deepEqual(body.calories, '60');
+                console.log (body);
             });
     });
 
-    it('get fruits', () => {
+    it('get all fruits', () => {
         return request
             .get('/fruits')
             .then(({ body }) => {
-                assert.deepEqual(body, [fruit]);
+                console.log(body);
+                assert.deepEqual(body, [berries, tropical]);
+            });
+    });
+
+    it ('removes a fruit', () => {
+        return request
+            .del(`/fruits/${tropical._id}`)
+            .then(() => {
+                return request.get('/fruits');
+            })
+            .then(({ body }) => {  
+                assert.deepEqual(body, [berries]);
+                console.log(body);
             });
     });
 });
