@@ -64,5 +64,14 @@ describe.only('pies api', () => {
             });
     });
 
-
+    it('removes a pie', () => {
+        return request
+            .del(`/pies/${pie._id}`)
+            .then(() => {
+                return request.get('/pies');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
