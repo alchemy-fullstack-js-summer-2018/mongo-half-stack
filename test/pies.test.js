@@ -53,4 +53,25 @@ describe.only('pies api', () => {
                 assert.deepEqual(body, pie);
             });
     });
+
+    it('updates a pie', () => {
+        pie.name = 'cherry pie';
+        return request
+            .put(`/pies/${pie._id}`)
+            .send(pie)
+            .then(({ body }) => {
+                assert.deepEqual(body, pie);
+            });
+    });
+
+    it('removes a pie', () => {
+        return request
+            .del(`/pies/${pie._id}`)
+            .then(() => {
+                return request.get('/pies');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
