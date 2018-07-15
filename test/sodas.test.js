@@ -38,4 +38,41 @@ describe('Sodas API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
+    it('Gets a soda by id', () => {
+        return request
+            .get(`/sodas/${soda._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, soda);
+            });
+    });
+
+    it('Updates a soda', () => {
+        soda.size = 'xxl';
+        return request
+            .put(`/sodas/${soda._id}`)   
+            .send(soda)
+            .then(({ body }) => {
+                assert.deepEqual(body, soda);
+            }); 
+    });
+
+    it('Gets sodas', () => {
+        return request
+            .get('/sodas')
+            .then(({ body }) => {
+                assert.deepEqual(body, [soda]);
+            });
+    });
+
+    it('Removes a soda', () => {
+        return request
+            .del(`/sodas/${soda._id}`)
+            .then(() => {
+                return request.get('/sodas');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
