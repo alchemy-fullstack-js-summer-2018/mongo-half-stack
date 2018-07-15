@@ -58,7 +58,7 @@ describe('Brewery API', () => {
             });
     });
 
-    it('Orders a beer by id', () => {
+    it('Orders a beer by id(get one)', () => {
         return request
             .get(`/brewery/${maibock._id}`)
             .then(({ body }) => {
@@ -66,7 +66,7 @@ describe('Brewery API', () => {
             });
     });
 
-    it('Updates beer', () => {
+    it('Refills beer(update)', () => {
         maibock.origin = 'Portland';
         return request
             .put(`/brewery/${maibock._id}`)
@@ -76,7 +76,7 @@ describe('Brewery API', () => {
             });
     });
 
-    it('Drinks beer', () => {
+    it('Drinks beer(delete)', () => {
         return request
             .del(`/brewery/${maibock._id}`)
             .then(({ body }) => {
@@ -84,7 +84,7 @@ describe('Brewery API', () => {
             });
     });
 
-    it('Beers for everyone!', () => {
+    it('Gets beer for everyone!(get all)', () => {
         return request
             .get('/brewery')
             .then(({ body }) => {
