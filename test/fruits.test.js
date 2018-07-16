@@ -71,16 +71,6 @@ describe('Fruits API', () => {
             
     });
 
-    it('updates a fruit', () => {
-        banana.color = 'green';
-        return request
-            .put(`/fruits/${banana._id}`)
-            .send(banana)
-            .then(({ body }) => {
-                assert.deepEqual(body, banana);
-            });
-    });
-
     it('removes a fruit', () => {
         return request
             .del(`/fruits/${banana._id}`)
@@ -91,6 +81,17 @@ describe('Fruits API', () => {
                 assert.deepEqual(body, []);
             });
     });
+
+    it('updates a fruit', () => {
+        banana.color = 'green';
+        return request
+            .put(`/fruits/${banana._id}`)
+            .send(banana)
+            .then(({ body }) => {
+                assert.deepEqual(body, banana);
+            });
+    });
+
 
   
     
