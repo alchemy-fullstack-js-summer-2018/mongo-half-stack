@@ -17,7 +17,7 @@ const orange = {
 };
 
 describe('Fruits API', () => {
-    
+
     it('returns 404 on bad URL', () => {
         return request 
             .get('/bad')
@@ -35,9 +35,9 @@ describe('Fruits API', () => {
             });
     });
 
-    it('gets a fruit by id', () => {
+    it.only('gets a fruit by id', () => {
         return request
-            .get(`fruits/${banana._id}`)
+            .get(`/fruits/${banana._id}`)
             .then(({ body }) =>{
                 assert.deepEqual(body, banana);
             });
