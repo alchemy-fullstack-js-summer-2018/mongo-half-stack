@@ -64,4 +64,15 @@ describe('Cakes API', () => {
                 assert.deepEqual(body, cake);
             });
     });
+
+    it('removes a cake', () => {
+        return request
+            .del(`/cakes/${cake._id}`)
+            .then(() => {
+                return request.get('/cakes');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
