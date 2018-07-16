@@ -1,42 +1,35 @@
-// const mongo = require('../lib/mongodb');
+const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
 describe('Desserts API', () => {
 
-    // beforeEach(() => {
-    //     return mongo.then(db => {
-    //         return db.collection('fruits').remove();
-    //     });
-    // });
+    beforeEach(() => {
+        return mongo.then(db => {
+            return db.collection('desserts').remove();
+        });
+    });
 
-    // let banana;
-    // beforeEach(() => {
-    //     const data = {
-    //         name : 'banana',
-    //         color : 'yellow',
-    //         shape : 'long'
-    //     };
+    let cookie;
+    beforeEach(() => {
+        const data = {
+            type : 'cookie',
+            description : 'snickerdoodle'
+        };
 
-    //     return request
-    //         .post('/fruits')
-    //         .send(data)
-    //         .then(({ body }) => {
-    //             assert.ok(body._id);
-    //             assert.equal(body.name, data.name);
-    //             banana = body;
-    //         });
-    // });
+        return request
+            .post('/desserts')
+            .send(data)
+            .then(({ body }) => {
+                assert.ok(body._id);
+                assert.equal(body.name, data.name);
+                cookie = body;
+            });
+    });
 
-    // it('saves a fruit', () => {
-    //     assert.ok(banana._id);
-    // });
-
-    const cookie = {
-        _id : '5b4cde443122f8ec53c23d34',
-        type : 'cookie',
-        description : 'snickerdoodle'
-    };
+    it('saves a fruit', () => {
+        assert.ok(cookie._id);
+    });
 
     it('returns 404 on bad URL', () => {
         return request 
@@ -65,9 +58,9 @@ describe('Desserts API', () => {
 
     // it('removes a fruit', () => {
     //     return request
-    //         .del(`/fruits/${banana._id}`)
+    //         .del(`/desserts/${cookie._id}`)
     //         .then(() => {
-    //             return request.get('/fruits');
+    //             return request.get('/desserts');
     //         })
     //         .then(({ body }) => {
     //             assert.deepEqual(body, []);
@@ -75,12 +68,12 @@ describe('Desserts API', () => {
     // });
 
     // it('updates a fruit', () => {
-    //     banana.color = 'green';
+    //     cookie.color = 'green';
     //     return request
-    //         .put(`/fruits/${banana._id}`)
-    //         .send(banana)
+    //         .put(`/desserts/${cookie._id}`)
+    //         .send(cookie)
     //         .then(({ body }) => {
-    //             assert.deepEqual(body, banana);
+    //             assert.deepEqual(body, cookie);
     //         });
     // });
 
