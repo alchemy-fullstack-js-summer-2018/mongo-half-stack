@@ -54,4 +54,14 @@ describe('Cakes API', () => {
                 assert.deepEqual(body, [cake]);
             });
     });
+
+    it('updates a cake', () => {
+        cake.name = 'Birthday Cake';
+        return request
+            .put(`/cakes/${cake._id}`)
+            .send(cake)
+            .then(({ body }) => {
+                assert.deepEqual(body, cake);
+            });
+    });
 });
