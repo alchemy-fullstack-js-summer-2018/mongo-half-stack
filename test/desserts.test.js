@@ -67,15 +67,15 @@ describe('Desserts API', () => {
     //         });
     // });
 
-    // it('updates a fruit', () => {
-    //     cookie.color = 'green';
-    //     return request
-    //         .put(`/desserts/${cookie._id}`)
-    //         .send(cookie)
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, cookie);
-    //         });
-    // });
+    it('updates a dessert', () => {
+        cookie.description = 'chocolate chip';
+        return request
+            .put(`/desserts/${cookie._id}`)
+            .send(cookie)
+            .then(({ body }) => {
+                assert.deepEqual(body, cookie);
+            });
+    });
 
 
   
