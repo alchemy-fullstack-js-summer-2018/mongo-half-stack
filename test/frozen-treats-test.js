@@ -47,4 +47,30 @@ describe('frozen treats API', () => {
                 assert.deepEqual(body, frozenTreat);
             });
     });
+    it('Updates a frozen treat', () => {
+        frozenTreat.type = 'sorbet';
+        return request
+            .put(`/frozenTreats/${frozenTreat._id}`)   
+            .send(frozenTreat)
+            .then(({ body }) => {
+                assert.deepEqual(body, frozenTreat);
+            }); 
+    });
+    it('Gets frozenTreats', () => {
+        return request
+            .get('/frozenTreats')
+            .then(({ body }) => {
+                assert.deepEqual(body, [frozenTreat]);
+            });
+    });
+    it('Removes a frozenTreat', () => {
+        return request
+            .del(`/frozenTreats/${frozenTreat._id}`)
+            .then(() => {
+                return request.get('/frozenTreats');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
