@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Squad Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Kills</th>
+                <th>Wins</th>
+            </tr>
+        </thead>
+        <tbody id="players"></tbody>
+    </table>
+
+    <script>
+        fetch('/players')
+            .then(response => response.json())
+            .then(players => {
+                const tbody = document.getElementById('players');
+                players.forEach(player => {
+                    const tr = document.createElement('tr');
+                    const tdName = document.createElement('td');
+                    tdName.innerText = player.name;
+                    tr.appendChild(tdName);
+                    const tdKills = document.createElement('td');
+                    tdKills.innerText = player.kills;
+                    tr.appendChild(tdKills);
+                    const tdWins = document.createElement('td');
+                    tdWins.innerText = player.wins;
+                    tr.appendChild(tdWins);
+                    tbody.appendChild(tr);
+                });
+            });
+    </script>
+</body>
+</html>
