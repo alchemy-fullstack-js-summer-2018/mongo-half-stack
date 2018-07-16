@@ -35,7 +35,7 @@ describe('Fruits API', () => {
             });
     });
 
-    it.only('gets a fruit by id', () => {
+    it('gets a fruit by id', () => {
         return request
             .get(`/fruits/${banana._id}`)
             .then(({ body }) =>{
