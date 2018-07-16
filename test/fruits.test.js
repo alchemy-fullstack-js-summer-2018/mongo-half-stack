@@ -34,5 +34,14 @@ describe('Fruits API', () => {
                 assert.deepEqual(body, [banana, orange]);
             });
     });
+
+    it('gets a fruit by id', () => {
+        return request
+            .get(`fruits/${banana._id}`)
+            .then(({ body }) =>{
+                assert.deepEqual(body, banana);
+            });
+            
+    });
     
 });
