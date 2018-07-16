@@ -57,7 +57,7 @@ describe('Sodas API', () => {
             }); 
     });
 
-    it('Gets sodas', () => {
+    it('Gets all sodas', () => {
         return request
             .get('/sodas')
             .then(({ body }) => {
