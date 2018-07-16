@@ -1,4 +1,4 @@
-//const mongo = require('../lib/mongodb');
+// const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
@@ -17,6 +17,15 @@ const orange = {
 };
 
 describe('Fruits API', () => {
+    
+    it('returns 404 on bad URL', () => {
+        return request 
+            .get('/bad')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
     it('gets fruits', () => {
         return request
             .get('/fruits')
@@ -25,4 +34,5 @@ describe('Fruits API', () => {
                 assert.deepEqual(body, [banana, orange]);
             });
     });
+    
 });
