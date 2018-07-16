@@ -56,16 +56,16 @@ describe('Desserts API', () => {
             
     });
 
-    // it('removes a fruit', () => {
-    //     return request
-    //         .del(`/desserts/${cookie._id}`)
-    //         .then(() => {
-    //             return request.get('/desserts');
-    //         })
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, []);
-    //         });
-    // });
+    it('removes a dessert', () => {
+        return request
+            .del(`/desserts/${cookie._id}`)
+            .then(() => {
+                return request.get('/desserts');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 
     it('updates a dessert', () => {
         cookie.description = 'chocolate chip';
