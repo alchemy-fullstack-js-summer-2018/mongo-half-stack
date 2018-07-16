@@ -54,14 +54,14 @@ describe('Desserts API', () => {
             });
     });
 
-    // it('gets a dessert by id', () => {
-    //     return request
-    //         .get(`/desserts/${cookie._id}`)
-    //         .then(({ body }) =>{
-    //             assert.deepEqual(body, cookie);
-    //         });
+    it('gets a dessert by id', () => {
+        return request
+            .get(`/desserts/${cookie._id}`)
+            .then(({ body }) =>{
+                assert.deepEqual(body, cookie);
+            });
             
-    // });
+    });
 
     // it('removes a fruit', () => {
     //     return request
