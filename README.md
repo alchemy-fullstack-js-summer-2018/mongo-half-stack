@@ -1,4 +1,4 @@
-Test HTTP Server
+MongoDB Full-Stack App
 =====
 This is an end-to-end (E2E) tested HTTP server written using Node.js, MongoDB, and tested with Mocha/Chai/Chai-HTTP!
 
