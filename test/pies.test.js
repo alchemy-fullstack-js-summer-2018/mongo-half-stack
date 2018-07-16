@@ -2,7 +2,7 @@ const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-describe.only('pies api', () => {
+describe('pies api', () => {
 
     beforeEach(() => {
         return mongo.then(db => {
