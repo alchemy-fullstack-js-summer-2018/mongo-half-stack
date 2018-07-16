@@ -58,7 +58,6 @@ describe('Fruits API', () => {
         return request
             .get('/fruits')
             .then(({ body }) => {
-                console.log('\n\n****here is the info****\n', body);
                 assert.deepEqual(body, [banana]);
             });
     });
@@ -70,6 +69,16 @@ describe('Fruits API', () => {
                 assert.deepEqual(body, banana);
             });
             
+    });
+
+    it('updates a fruit', () => {
+        banana.color = 'green';
+        return request
+            .put(`/fruits/${banana._id}`)
+            .send(banana)
+            .then(({ body }) => {
+                assert.deepEqual(body, banana);
+            });
     });
 
   
