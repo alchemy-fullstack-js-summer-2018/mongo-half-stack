@@ -53,7 +53,7 @@ describe('Fruits API', () => {
 
     it('returns 404 on a bad url', () => {
         return request
-            .get('/bad')
+            .get('/bad-url')
             .then(res => {
                 assert.equal(res.status, 404);
             });
@@ -74,7 +74,6 @@ describe('Fruits API', () => {
             .send(berries)
             .then(({ body }) => {
                 assert.deepEqual(body.calories, '60');
-                console.log (body);
             });
     });
 
@@ -82,7 +81,6 @@ describe('Fruits API', () => {
         return request
             .get('/fruits')
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, [berries, tropical]);
             });
     });
@@ -95,7 +93,6 @@ describe('Fruits API', () => {
             })
             .then(({ body }) => {  
                 assert.deepEqual(body, [berries]);
-                console.log(body);
             });
     });
 });
