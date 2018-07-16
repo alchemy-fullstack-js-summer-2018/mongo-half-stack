@@ -2,7 +2,7 @@ const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-describe.only('Events API', () => {
+describe('Events API', () => {
     let savedEvents = [];
     let gameNight = {};
     let tournament = {};

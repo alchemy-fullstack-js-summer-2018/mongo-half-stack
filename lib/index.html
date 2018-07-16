@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    table {
+        margin: 30px;
+    }
+    
+    td, th {
+        padding: 10px;
+        text-align: left;
+    }
+    </style>
 </head>
 <body>
     <h1>Squad Leaderboard</h1>
@@ -17,6 +27,26 @@
             </tr>
         </thead>
         <tbody id="players"></tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Games</th>
+                <th>Invitees</th>
+            </tr>
+        </thead>
+        <tbody id="events"></tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Players</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody id="games"></tbody>
     </table>
 
     <script>
@@ -35,6 +65,42 @@
                     const tdWins = document.createElement('td');
                     tdWins.innerText = player.wins;
                     tr.appendChild(tdWins);
+                    tbody.appendChild(tr);
+                });
+            });
+        fetch('/events')
+            .then(response => response.json())
+            .then(events => {
+                const tbody = document.getElementById('events');
+                events.forEach(event => {
+                    const tr = document.createElement('tr');
+                    const tdName = document.createElement('td');
+                    tdName.innerText = event.name;
+                    tr.appendChild(tdName);
+                    const tdGames = document.createElement('td');
+                    tdGames.innerText = event.games;
+                    tr.appendChild(tdGames);
+                    const tdInvitees = document.createElement('td');
+                    tdInvitees.innerText = event.invitees.join(', ');
+                    tr.appendChild(tdInvitees);
+                    tbody.appendChild(tr);
+                });
+            });
+        fetch('/games')
+            .then(response => response.json())
+            .then(games => {
+                const tbody = document.getElementById('games');
+                games.forEach(game => {
+                    const tr = document.createElement('tr');
+                    const tdName = document.createElement('td');
+                    tdName.innerText = game.name;
+                    tr.appendChild(tdName);
+                    const tdPlayers = document.createElement('td');
+                    tdPlayers.innerText = game.players;
+                    tr.appendChild(tdPlayers);
+                    const tdType = document.createElement('td');
+                    tdType.innerText = game.type;
+                    tr.appendChild(tdType);
                     tbody.appendChild(tr);
                 });
             });
