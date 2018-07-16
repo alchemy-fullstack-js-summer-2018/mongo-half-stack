@@ -2,25 +2,27 @@
 const { assert } = require('chai');
 const request = require('./request');
 
-let fruit = [{
+const banana = {
+    _id : '5b48de85c3356397876ad468',
     name : 'banana',
     color : 'yellow',
     shape : 'long'
-},
+};
 
-{
+const orange = {
+    _id : '5b48ef3f6e2f2c18eb85a2bd',
     name : 'orange',
     color : 'orange',
     shape : 'round'
-}];
+};
 
 describe('Fruits API', () => {
     it('gets fruits', () => {
         return request
             .get('/fruits')
             .then(({ body }) => {
-                console.log('\n\n****here is the info**\n', body);
-                assert.deepEqual(body, [fruit]);
+                console.log('\n\n****here is the info****\n', body);
+                assert.deepEqual(body, [banana, orange]);
             });
     });
 });
