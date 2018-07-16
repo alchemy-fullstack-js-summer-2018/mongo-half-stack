@@ -37,4 +37,21 @@ describe('Cakes API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
+    it('gets a cake by id', () => {
+        return request
+            .get(`/cakes/${cake._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, cake);
+            });
+    });
+
+
+    it('gets cakes', () => {
+        return request
+            .get('/cakes')
+            .then(({ body }) => {
+                assert.deepEqual(body, [cake]);
+            });
+    });
 });
