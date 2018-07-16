@@ -2,7 +2,7 @@ const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-describe('pies api', () => {
+describe('Pies API', () => {
 
     beforeEach(() => {
         return mongo.then(db => {
@@ -21,11 +21,10 @@ describe('pies api', () => {
             .send(data)
             .then(({ body }) => {
                 assert.ok(body._id);
-                assert.equal(body.name, 'creampie');
+                assert.equal(body.name, data.name);
                 pie = body;
             });
     });
-
     
     it('saves a pie', () => {
         assert.ok(pie._id);

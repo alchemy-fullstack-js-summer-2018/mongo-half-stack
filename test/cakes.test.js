@@ -30,11 +30,11 @@ describe('Cakes API', () => {
         assert.ok(cake._id);
     });
 
-    it('returns 404 bad url', () => {
+    it('gets cakes', () => {
         return request
-            .get('/bad') 
-            .then(res => {
-                assert.equal(res.status, 404);
+            .get('/cakes')
+            .then(({ body }) => {
+                assert.deepEqual(body, [cake]);
             });
     });
 
@@ -43,15 +43,6 @@ describe('Cakes API', () => {
             .get(`/cakes/${cake._id}`)
             .then(({ body }) => {
                 assert.deepEqual(body, cake);
-            });
-    });
-
-
-    it('gets cakes', () => {
-        return request
-            .get('/cakes')
-            .then(({ body }) => {
-                assert.deepEqual(body, [cake]);
             });
     });
 
@@ -73,6 +64,14 @@ describe('Cakes API', () => {
             })
             .then(({ body }) => {
                 assert.deepEqual(body, []);
+            });
+    });
+
+    it('returns 404 bad url', () => {
+        return request
+            .get('/bad') 
+            .then(res => {
+                assert.equal(res.status, 404);
             });
     });
 });

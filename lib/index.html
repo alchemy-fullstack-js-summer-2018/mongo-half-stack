@@ -10,13 +10,23 @@
     <h1>I a page.</h1>
     <ul id="shows"></ul>
     <script>
-        fetch('./routes/pies')
+        fetch('./pies')
             .then(response => response.json())
             .then(pies => {
                 const ul = document.getElementById('pies');
                 pies.forEach(pie => {
                     const li = document.createElement('li');
                     li.innerText = `${pie.name}`;
+                    ul.appendChild(li);
+                })
+            })
+        fetch('./cakes')
+            .then(response => response.json())
+            .then(cakes => {
+                const ul = document.getElementById('cakes');
+                cakes.forEach(cake => {
+                    const li = document.createElement('li');
+                    li.innerText = `${cake.name}`;
                     ul.appendChild(li);
                 })
             })
