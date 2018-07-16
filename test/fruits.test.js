@@ -81,6 +81,17 @@ describe('Fruits API', () => {
             });
     });
 
+    it('removes a fruit', () => {
+        return request
+            .del(`/fruits/${banana._id}`)
+            .then(() => {
+                return request.get('/fruits');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
   
     
 });
