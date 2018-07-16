@@ -1,22 +1,50 @@
-// const mongo = require('../lib/mongodb');
+const mongo = require('../lib/mongodb');
 const { assert } = require('chai');
 const request = require('./request');
 
-const banana = {
-    _id : '5b48de85c3356397876ad468',
-    name : 'banana',
-    color : 'yellow',
-    shape : 'long'
-};
+// const banana = {
+//     _id : '5b48de85c3356397876ad468',
+//     name : 'banana',
+//     color : 'yellow',
+//     shape : 'long'
+// };
 
-const orange = {
-    _id : '5b48ef3f6e2f2c18eb85a2bd',
-    name : 'orange',
-    color : 'orange',
-    shape : 'round'
-};
+// const orange = {
+//     _id : '5b48ef3f6e2f2c18eb85a2bd',
+//     name : 'orange',
+//     color : 'orange',
+//     shape : 'round'
+// };
 
 describe('Fruits API', () => {
+
+    beforeEach(() => {
+        return mongo.then(db => {
+            return db.collection('fruits').remove();
+        });
+    });
+
+    let banana;
+    beforeEach(() => {
+        const data = {
+            name : 'banana',
+            color : 'yellow',
+            shape : 'long'
+        };
+
+        return request
+            .post('/fruits')
+            .send(data)
+            .then(({ body }) => {
+                assert.ok(body._id);
+                assert.equal(body.name, data.name);
+                banana = body;
+            });
+    });
+
+    it('saves a fruit', () => {
+        assert.ok(banana._id);
+    });
 
     it('returns 404 on bad URL', () => {
         return request 
@@ -31,7 +59,7 @@ describe('Fruits API', () => {
             .get('/fruits')
             .then(({ body }) => {
                 console.log('\n\n****here is the info****\n', body);
-                assert.deepEqual(body, [banana, orange]);
+                assert.deepEqual(body, [banana]);
             });
     });
 
@@ -43,5 +71,7 @@ describe('Fruits API', () => {
             });
             
     });
+
+  
     
 });
