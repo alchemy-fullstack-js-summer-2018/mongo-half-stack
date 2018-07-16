@@ -13,7 +13,7 @@ describe('Cakes API', () => {
     let cake;
     beforeEach(() => {
         const data = {
-            name: 'Lamington'
+            name: 'Lamington',
         };
 
         return request 
