@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to our Treats page!</h1>
+    <p>Click one of the links below to get started:</p>
+    <ul id="treats">
+        <li><a href="http://localhost:3000/pies">Check out pies</a></li>
+        <li><a href="http://localhost:3000/cakes">Check out cakes</a></li>
+    </ul>
+    <script>
+        fetch('./pies')
+            .then(response => response.json())
+            .then(pies => {
+                const ul = document.getElementById('pies');
+                pies.forEach(pie => {
+                    const li = document.createElement('li');
+                    li.innerText = `${pie.name}`;
+                    ul.appendChild(li);
+                })
+            })
+        fetch('./cakes')
+            .then(response => response.json())
+            .then(cakes => {
+                const ul = document.getElementById('cakes');
+                cakes.forEach(cake => {
+                    const li = document.createElement('li');
+                    li.innerText = `${cake.name}`;
+                    ul.appendChild(li);
+                })
+            })
+    </script>
+    
+</body>
+</html>
